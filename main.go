@@ -14,6 +14,9 @@ import (
 
 // 1 define handler function
 func sayHello(w http.ResponseWriter, r *http.Request) {
+	// allow cross origin
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
 	w.Write([]byte("<p>Hello World</p>"))
 }
 
@@ -37,6 +40,8 @@ func main() {
 
 // b.1 define service logic
 func uploadHandler(w http.ResponseWriter, r *http.Request) {
+	// allow cross origin
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 
 	// 1) -> corp 1st 10MB of r.Body and try to parse.
 	// if no err then the file is less than 10MB
@@ -84,6 +89,14 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 
 // 3.1 vlog get file list handler
 func getFileListHandler(w http.ResponseWriter, r *http.Request) {
+
+	fmt.Printf("getting the list of the videos")
+
+	// allow cross origin
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+
 	files, _ := filepath.Glob("video/*")
 
 	resp := []string{}

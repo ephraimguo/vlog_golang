@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>my V Log</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current">
+        <header class="bar bar-nav">
+            <h1 class="title">my V Log</h1>
+        </header>
+
+        <div class="content" id="content-mp4">
+
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-content-inner">
+                        <video controls="controls" preload="auto" width="100%" height="100%">
+                            <source src=`` type="video/mp4">
+
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="bar bar-tab">
+<!--            <div class="content-block">-->
+                <div class="row">
+                    <div class="col-50"><a href="#" class="button button-big">mine</a></div>
+                    <div class="col-50"><a href="#" class="button button-big button-fill">upload</a></div>
+                </div>
+<!--            </div>-->
+        </nav>
+
+
+
+    </div>
+</div>
+
+<script  type='text/javascript' >
+    function getList() {
+        axios.get("http://10.2.14.12:8008/api/list")
+        .then(function (r) {
+            return r.data;
+        }).then(function (dt) {
+            // get the content div
+            var contentDivMp4 = document.querySelector("#content-mp4");
+            // render the list
+            contentDivMp4.innerHTML = "";
+            for(var d of dt) {
+                console.log("d is ", d);
+
+                contentDivMp4.innerHTML += `
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-content-inner">
+                            <video controls="controls" preload="auto" width="100%" height="100%">
+                                <source src="${d}" type="video/mp4">
+
+                            </video>
+                        </div>
+                    </div>
+                </div>
+                `
+
+            }
+
+        });
+    }
+    getList();
+
+</script>
+
+<script type='text/javascript' src='http://g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+
+</body>
+</html>
