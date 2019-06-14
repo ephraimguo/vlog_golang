@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 )
 
@@ -14,6 +15,6 @@ func main() {
 	http.HandleFunc("/sayHello", sayHello)
 
 	http.ListenAndServe(":3001", nil)
-	//fmt.Println("Testing")
 
+	fmt.Println("this is the first server back")
 }
