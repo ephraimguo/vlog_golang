@@ -23,16 +23,16 @@
 
         <div class="content" id="content-mp4">
 
-            <div class="card">
-                <div class="card-content">
-                    <div class="card-content-inner">
-                        <video controls="controls" preload="auto" width="100%" height="100%">
-                            <source src=`` type="video/mp4">
+<!--            <div class="card">-->
+<!--                <div class="card-content">-->
+<!--                    <div class="card-content-inner">-->
+<!--                        <video controls="controls" preload="auto" width="100%" height="100%">-->
+<!--                            <source src=`` type="video/mp4">-->
 
-                        </video>
-                    </div>
-                </div>
-            </div>
+<!--                        </video>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
 
         <nav class="bar bar-tab">
@@ -49,8 +49,9 @@
     </div>
 </div>
 
-<script  type='text/javascript' >
-    function getList() {
+<script  type='text/javascript'>
+
+    var getList = function () {
         axios.get("http://10.2.14.12:8008/api/list")
         .then(function (r) {
             return r.data;
@@ -78,8 +79,11 @@
             }
 
         });
+    };
+    // getList();
+    window.onload = function() {
+        getList();
     }
-    getList();
 
 </script>
 
