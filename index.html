@@ -39,7 +39,12 @@
 <!--            <div class="content-block">-->
                 <div class="row">
                     <div class="col-50"><a href="#" class="button button-big">mine</a></div>
-                    <div class="col-50"><a href="#" class="button button-big button-fill">upload</a></div>
+                    <div class="col-50">
+                        <form id="signupListImportForm" enctype="multipart/form-data">
+                            <input type="file" id="btn-file" style="display:none" name="uploadFile" onchange="uploadFile()"/>
+                            <a onlick="" class="button button-big button-fill">upload</a>
+                        </form>
+                    </div>
                 </div>
 <!--            </div>-->
         </nav>
@@ -50,6 +55,29 @@
 </div>
 
 <script  type='text/javascript'>
+
+
+
+    // function selectFile() {
+    //     var file = document.getElementById("btn-file").click();
+    // }
+
+    function uploadFile() {
+        console.log("upload triggered");
+        var file = document.querySelector("#btn-file").files[0];
+        var fData = new FormData();
+        fData.append("uploadFile", file);
+        axios.post("http://192.168.1.13:8008/api/upload", fData, {
+          headers: {
+              "Content-Type": "multipart/form-data"
+          }
+        }).then(r=> {
+           alert("resp ", r);
+        });
+    }
+
+    var button_fileUpload = document.querySelector("#btn-file");
+    button_fileUpload.onchange = uploadFile();
 
     var getList = function () {
         axios.get("http://192.168.1.13:8008/api/list")
@@ -80,10 +108,9 @@
 
         });
     };
-    getList();
-    // window.onload = function() {
-    //     getList();
-    // }
+    window.onload = function() {
+        getList();
+    }
 
 </script>
 
