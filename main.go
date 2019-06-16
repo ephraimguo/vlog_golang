@@ -61,7 +61,7 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 
 	// 3) check file format, if not .mp4 then give error
 	fFmt := strings.HasSuffix(fileHeader.Filename, ".mp4")
-	if fFmt {
+	if fFmt == false {
 		http.Error(w, "Format is not .mp4", http.StatusInternalServerError)
 		return
 	}
